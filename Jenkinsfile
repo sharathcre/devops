@@ -4,7 +4,8 @@ pipeline {
          stage('Checkout') {
             steps {
                 echo'Cloning Repository'
-               sh '''if [-d devops]
+               sh '''#!/bin/bash
+                     if [-d devops]
                      then
                         cd devops
                         git pull

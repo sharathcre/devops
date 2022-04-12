@@ -15,6 +15,7 @@ pipeline {
         stage('Build Artifact') {
             steps {
                 echo'Build Artifact'
+                sh'mvn package'
             }
         }
         stage('Publish Artifact to Nexus') {

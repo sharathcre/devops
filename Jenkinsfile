@@ -1,6 +1,12 @@
 pipeline {
     agent any 
     stages {
+         stage('Checkout') {
+            steps {
+                echo'Cloning Repository'
+                sh'git clone https://github.com/sharathcre/devops.git'
+            }
+        }
         stage('Unit Testing') {
             steps {
                 echo'Unit Testing'

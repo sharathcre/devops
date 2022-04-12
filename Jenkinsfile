@@ -1,20 +1,6 @@
 pipeline {
     agent any 
     stages {
-         stage('Checkout') {
-            steps {
-                echo'Cloning Repository'
-               sh '''#!/bin/bash
-                     if [-d devops]
-                     then
-                        cd devops
-                        git pull
-                     else
-                        git clone https://github.com/sharathcre/devops.git
-                     fi
-                  '''
-            }
-        }
         stage('Unit Testing') {
             steps {
                 echo'Unit Testing'

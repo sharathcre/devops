@@ -4,13 +4,14 @@ pipeline {
          stage('Checkout') {
             steps {
                 echo'Cloning Repository'
-                sh '''if [-d devops]
-                    then
-                    cd devops
-                    git pull
-                    else
-                    git clone https://github.com/sharathcre/devops.git
-                    '''
+               sh '''if [-d devops]
+                     then
+                        cd devops
+                        git pull
+                     else
+                        git clone https://github.com/sharathcre/devops.git
+                     fi
+                  '''
             }
         }
         stage('Unit Testing') {

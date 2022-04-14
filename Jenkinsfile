@@ -10,7 +10,6 @@ pipeline {
         stage('Sonar Analysis') {
             steps {
                 echo'Sonar Analysis'
-                //sh''
             }
         }
         stage('Build Artifact') {
@@ -28,8 +27,6 @@ pipeline {
         stage('Deploy Artifact on Tomcat') {
             steps {
                 echo'Deploying'
-                //sh'wget --user admin --password admin123 <artifact-url>
-'
             }
         }
     }

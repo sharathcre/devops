@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo'Deploying'
                 script {
-                    deploy adapters: [tomcat7(credentialsId: 'TOMCAT', path: '', url: 'http://34.201.129.115:8080/')], contextPath: '/pipeline', onFailure: false, war: 'webapp/target/*.war' 
+                    deploy adapters: [tomcat7(credentialsId: 'TOMCAT', path: '', url: 'http://34.201.129.115:8080/')], contextPath: '/pipeline', onFailure: false, war: '**/*.war' 
         }
             }
         }

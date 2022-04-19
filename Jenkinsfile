@@ -16,8 +16,8 @@ pipeline {
             steps {
                 echo'Sonar Analysis'
                 sh'mvn sonar:sonar \
-                    -Dsonar.host.url=http://35.173.232.225:9000 \
-                    -Dsonar.login=01a0f7409659f9e0ed9f9f22581a537b07280794'
+  -Dsonar.host.url=http://54.234.141.174:9000 \
+  -Dsonar.login=9cf92745d2da1e153656da0f9fd7be3577c2e2fb
             }
         }
         stage('Docker Build') {

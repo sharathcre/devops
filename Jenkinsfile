@@ -9,7 +9,7 @@ pipeline {
         stage('Unit Testing') {
             steps {
                 echo'Unit Testing'
-                sh'mvn test'
+                sh'mvn clean test'
             }
         }
         stage('Sonar Analysis') {

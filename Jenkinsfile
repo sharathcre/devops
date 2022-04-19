@@ -1,6 +1,11 @@
 pipeline {
     agent any 
     stages {
+        stage('Checkout'){
+            steps{
+                git branch:'master' , url: 'https://github.com/sharathcre/devops.git'
+            }
+        }
         stage('Unit Testing') {
             steps {
                 echo'Unit Testing'
@@ -11,14 +16,15 @@ pipeline {
             steps {
                 echo'Sonar Analysis'
                 sh'mvn sonar:sonar \
-  -Dsonar.host.url=http://35.173.232.225:9000 \
-  -Dsonar.login=01a0f7409659f9e0ed9f9f22581a537b07280794'
+                    -Dsonar.host.url=http://35.173.232.225:9000 \
+                    -Dsonar.login=01a0f7409659f9e0ed9f9f22581a537b07280794'
             }
         }
-        stage('Build Artifact') {
+        stage('Docker Build') {
             steps {
-                echo'Build Artifact'
-                sh'mvn clean package'
+                echo'Docker Build'
+                sh'docker build -t calculator:latest .'
+                sh'docker tag calculator sharathcre/calculator:$BUILD_NUMBER'
             }
         }
         stage('Publish Artifact to Nexus') {
@@ -27,13 +33,18 @@ pipeline {
                 sh'mvn deploy'
             }
         }
-        stage('Deploy Artifact on Tomcat') {
+        stage('Run Docker container on Jenkins') {
             steps {
-                echo'Deploying'
-                script {
-                    deploy adapters: [tomcat7(credentialsId: 'TOMCAT', path: '', url: 'http://34.201.129.115:8080/')], contextPath: '/pipeline', onFailure: false, war: '**/*.war' 
-        }
+                sh'docker run -d -p 6060:8080 sharathcre/calculator'
             }
+        }
+         stage('Publish image to Docker Hub') {
+            steps {
+                withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+                sh 'docker push sharathcre/calculator:$BUILD_NUMBER' 
+        }
+                  
+          }
         }
     }
 }

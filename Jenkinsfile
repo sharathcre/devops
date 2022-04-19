@@ -38,13 +38,13 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
                 sh 'docker push sharathcre/calculator:$BUILD_NUMBER' 
+                }
+            }
         }
         stage('Run Docker container on Remote host') {
             steps {
                 sh'docker run -d -p 6060:8080 sharathcre/calculator'
             }
         }             
-          }
-        }
     }
 }

@@ -23,6 +23,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 echo'Docker Build'
+                sh'mvn clean package'
                 sh'docker build -t calculator:latest .'
                 sh'docker tag calculator sharathcre/calculator:$BUILD_NUMBER'
             }

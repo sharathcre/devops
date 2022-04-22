@@ -43,7 +43,7 @@ pipeline {
         }
         stage('Run Docker container on Remote host') {
             steps {
-                sh'docker run -d -p 6060:8080 sharathcre/calculator:9'
+                sh'docker run -d -p 6060:8080 sharathcre/calculator:2'
             }
         }             
     }
